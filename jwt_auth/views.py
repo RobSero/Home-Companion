@@ -25,7 +25,7 @@ class Register(APIView):
   # No Token Required
     
     def post(self,req):
-        req.data['money'] = 500000
+        print('creating account')
         created_user = UserSerializer(data=req.data) #converts json to python object and runs the validator function
         if created_user.is_valid():
             created_user.save()
@@ -104,7 +104,6 @@ class ProfileData(APIView):
   # No body required
   # Valid Token Required
   def get(self,req):
-    print('HELLO')
     user = self.get_user_details(req.user.id)
     serialized_user = UserSerializer(user)
     print(serialized_user.data)
