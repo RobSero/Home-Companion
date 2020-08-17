@@ -8,7 +8,7 @@ class Tasks(models.Model):
   creator = models.ForeignKey(
     'jwt_auth.User',
     related_name='task_creator',
-    on_delete=models.PROTECT
+    on_delete=models.CASCADE
   )
   completed_by = models.ForeignKey(
     'jwt_auth.User',
@@ -23,9 +23,10 @@ class Tasks(models.Model):
     on_delete=models.PROTECT
   )
   updated_at = models.DateTimeField(auto_now=True)
-  # location = models.ForeignKey(
-  #   'jwt_auth.User',
-  #   related_name='task',
-  #   on_delete=models.PROTECT
-  # )
+  location = models.ForeignKey(
+    'location.Location',
+    related_name='task_location',
+    on_delete=models.CASCADE,
+    null=True
+  )
   

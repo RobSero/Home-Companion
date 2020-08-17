@@ -12,9 +12,9 @@ class Location(models.Model):
   )
   landlord_name = models.CharField(max_length=30)
   landlord_email = models.CharField(max_length=60)
-  landlord_number = models.IntegerField(max_length=15)
+  landlord_number = models.IntegerField()
   members = models.ManyToManyField(
      'jwt_auth.User',
-      related_name='watching',
+      related_name='location_members',
       blank=True
   )
