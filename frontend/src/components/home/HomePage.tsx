@@ -35,7 +35,7 @@ function HomePage() {
   }
 
   return (
-    <div className='container'>
+    <div className='r-container'>
       <div className='home-flex'>
         <div className='home-flex-item'>
           <img className='home-img' src='https://res.cloudinary.com/dy7eycl8m/image/upload/v1598094090/homeCompanionApp/pngwave_30_v9u3t8.png'></img>

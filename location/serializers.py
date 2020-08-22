@@ -13,6 +13,6 @@ class SimpleLocationSerializer(serializers.ModelSerializer):
   
   class Meta:
     model = Location
-    fields = ('property_name','members')
+    fields = ('property_name','members','id')
     
     
