@@ -8,6 +8,9 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
 from .serializers import UserSerializer
+from location.models import Location
+
+
 User = get_user_model()
 
 # FIND USER AND RAISE ERROR IF THEY DO NOT EXIST
@@ -26,6 +29,7 @@ class Register(APIView):
     
     def post(self,req):
         print('creating account')
+        req.data['profile_image'] = 'XXX'
         created_user = UserSerializer(data=req.data) #converts json to python object and runs the validator function
         if created_user.is_valid():
             created_user.save()
@@ -104,8 +108,8 @@ class ProfileData(APIView):
   # No body required
   # Valid Token Required
   def get(self,req):
+    # get user
     user = self.get_user_details(req.user.id)
     serialized_user = UserSerializer(user)
-    print(serialized_user.data)
     return Response(serialized_user.data, status=status.HTTP_200_OK)
   

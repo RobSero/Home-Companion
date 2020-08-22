@@ -1,4 +1,4 @@
-from .serializers import LocationSerializer
+from .serializers import LocationSerializer, SimpleLocationSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -115,3 +115,27 @@ class LocationMembers(APIView):
       location.members.remove(member_to_remove)
       return Response({'message' : 'Member removed from property'}, status=status.HTTP_202_ACCEPTED)
     return PermissionDenied()
+
+
+
+
+#  ----------- GET USERS LOCATIONS ---------------
+
+# GET request to /user/locations
+#  no body required
+#  valid token required
+class UserLocations(APIView):
+  
+  permission_classes = (IsAuthenticated,)
+  
+  def get(self,req):
+    print('HELLO')
+    # get the user from token
+    user = get_user(pk=req.user.id)
+    print(user)
+    # get list of all locations they are member of (incl other members)
+    location_list = Location.objects.filter(members=user.id)
+    print(location_list)
+    serialized_locations = SimpleLocationSerializer(location_list, many=True)
+    # return the data
+    return Response(serialized_locations.data)

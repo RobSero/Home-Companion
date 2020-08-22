@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input, Button  } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import {registerUser} from '../../lib/api'
 
 
 const Register = (props:any) => {
@@ -14,7 +15,20 @@ const Register = (props:any) => {
     })
   }
 
-  const submitRegistration = () => {
+  const submitRegistration = async(e:any) => {
+    e.preventDefault()
+    console.log('submitting');
+    
+    try {
+      const res = await registerUser(registerData)
+      console.log('SUCCESS')
+      console.log(res.data);
+      props.loginShow()
+
+    }
+    catch(err){
+      console.log(err.response.data);
+    }
     
   }
 
@@ -24,9 +38,12 @@ const Register = (props:any) => {
     <Button className='home-form-button' type="primary" shape="round" size='large'>
         Sign Up with Facebook
       </Button>
+      <form onSubmit={submitRegistration}>
     <Input name='first_name' onChange={userInput} className='home-form-input' placeholder="First Name" prefix={<UserOutlined />} />
     <br />
     <Input name='last_name' onChange={userInput} className='home-form-input' placeholder="Last Name" prefix={<UserOutlined />} />
+    <br />
+    <Input name='username' onChange={userInput} className='home-form-input' placeholder="Username" prefix={<UserOutlined />} />
     <br />
     <Input name='email' onChange={userInput} className='home-form-input' placeholder="Email" prefix={<UserOutlined />} />
     <br />
@@ -34,9 +51,10 @@ const Register = (props:any) => {
     <br />
     <Input.Password name='password_confirmation' onChange={userInput}  className='home-form-input' placeholder="Password Confirmation" prefix={<UserOutlined />} />
     <br />
-    <Button className='home-form-button' type="primary" shape="round" size='large'>
-        Login
+    <Button htmlType="submit" className='home-form-button' type="primary" shape="round" size='large'>
+        Register
       </Button>
+      </form>
       <p onClick={()=>{props.loginShow()}}  className='home-form-text'>Already Registered? Sign ip here</p>
     
       

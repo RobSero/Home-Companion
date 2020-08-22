@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Location
+from jwt_auth.serializers import SimpleUserSerializer
 
 class LocationSerializer(serializers.ModelSerializer):
   class Meta:
@@ -8,6 +9,10 @@ class LocationSerializer(serializers.ModelSerializer):
     
 
 class SimpleLocationSerializer(serializers.ModelSerializer):
+  members = SimpleUserSerializer(many=True)
+  
   class Meta:
     model = Location
-    fields = ('property_name',)
+    fields = ('property_name','members')
+    
+    
