@@ -1,6 +1,47 @@
-.home-flex-item {
+.home-flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  background-color: red;
+  padding: 2rem;
+
+  .home-img {
+    width: 70rem;
+  }
+
+  .form-box {
+    width: 40vw;
+    background-color: green;
+    height: 50rem;
+  }
+}
+
+.fade-animation {
+  transition: all 0.5s ease;
+}
+
+.home-form {
+width: 40rem;
+padding: 1.5rem;
+border-radius: 1rem;
+text-align: center;
+background-color: white;
+
+.home-form-header {
+  font-size: 2.5rem;
+}
+
+.home-form-button {
+  font-size: 1.5rem;
+}
+
+.home-form-input {
+  width: 70%;
+  margin: 1rem;
+  border-radius: 0.5rem;
+}
+
+.home-form-text {
+  margin: 1rem;
+  font-size: 1.5rem;
+}
 }
