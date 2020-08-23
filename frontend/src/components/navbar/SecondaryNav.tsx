@@ -1,25 +1,32 @@
 import React from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
+import NewPropertyModal from '../dataInput/NewPropertyModal'
 import {getUserLocations} from '../../lib/api'
+import {CaretDownOutlined} from '@ant-design/icons';
 
 const SecondaryNavbar = () => {
 const [isOpen, toggleOpen] = React.useState(false)
 const [userLocationList, setList] = React.useState([])
-const [mainProperty, setMainProperty] = React.useState({property_name: null, members:[]})
+const [mainProperty, setMainProperty] = React.useState({property_name: null, members:[], id: null})
+const [reload,setReload] = React.useState(false)
 
-React.useEffect(()=> {
-  const getUserData = async() => {
-    try {
-      const res = await getUserLocations()
-      console.log(`success! User has ${res.data.length} locations`);
-      
-      setList(res.data)
-      setMainProperty(res.data[0])
-    }
-    catch(err) {
-      console.log(err.response);
-    }
+// --------------- COLLECT THE USER'S LOCATION DATA ----------------
+const getUserData = async() => {
+  try {
+    const res = await getUserLocations()
+    console.log(`success! User has ${res.data.length} locations`);
+    setMainProperty(res.data[0])
+    setList(res.data)
+    
   }
+  catch(err) {
+    console.log(err.response);
+  }
+}
+
+// --------------- ON COMPONENT MOUNT ----------------
+React.useEffect(()=> {
 getUserData()
 }, [])
 
@@ -27,6 +34,7 @@ const toggleNav = () => {
   toggleOpen(!isOpen)
 }
 
+// --------------- SET USERS CURRENT LOCATION ----------------
 const changeLocation = (num:number) => {
   const selectedLocation = userLocationList.filter((location:any) => {
       return location['id'] === num
@@ -36,13 +44,15 @@ const changeLocation = (num:number) => {
 
   return (
     <nav className="navbar is-transparent is-dark">
+      {/* USERS LIST OF LOCATIONS */}
     <div className="navbar-brand">
       {userLocationList.length === 0 ? 
        <div className="navbar-item">
-       <p>ADD PROPERTY HERE</p>
+       <NewPropertyModal addPropertyToList={getUserData} />
      </div> :
      <div className="navbar-item has-dropdown is-hoverable">
-     <p>{mainProperty['property_name']}</p>
+       {/* MAP OUT LIST OF USER'S PROPERTIES */}
+     <p>{mainProperty['property_name']}</p><CaretDownOutlined />
      <div className="navbar-dropdown is-boxed">
         {userLocationList.length === 1 ? '' :
         userLocationList.map((location:any) => {
@@ -53,15 +63,15 @@ const changeLocation = (num:number) => {
           )
         })  
       }
-
-
+      {/* ADD PROPERTY MODAL BUTTON */}
           <p className="navbar-item">
-            Add Property
+          <NewPropertyModal addPropertyToList={getUserData} />
           </p>
+          
           </div>
    </div>
       }
-     
+     {/* BURGER MENU FOR MOBILE */}
       <div onClick={toggleNav} className={isOpen? "navbar-burger burger is-active" : "navbar-burger burger" } data-target="navbarExampleTransparentExample">
         <span></span>
         <span></span>
@@ -69,11 +79,21 @@ const changeLocation = (num:number) => {
       </div>
     </div>
   
+  {/* PROPERTY OPTIONS ON NAVBAR */}
     <div id="navbarExampleTransparentExample" className={isOpen? "navbar-menu is-active" : "navbar-menu" }>
       <div className="navbar-start">
-        <a className="navbar-item" href="https://bulma.io/">
+        <Link to={`/tasks/${mainProperty.id}`}>
           Tasks
-        </a>
+        </Link>
+        <Link to={`/groceries/${mainProperty.id}`}>
+          Groceries
+          </Link>
+        <Link to={`/calendar/${mainProperty.id}`}>
+          Calendar
+          </Link>
+        <Link to={`/details/${mainProperty.id}`}>
+          Property Details
+          </Link>
       </div>
   
       <div className="navbar-end">

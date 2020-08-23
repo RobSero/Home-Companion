@@ -22,3 +22,7 @@ export const loginUser = async(formData:object) => {
 export const getUserLocations = async() => {
   return await axios.get(`${baseUrl}/location/user/`, withHeaders()) 
 }
+
+export const createProperty = async(formData:object) => {
+  return await axios.post(`${baseUrl}/location/setup/`, formData, withHeaders()) 
+}

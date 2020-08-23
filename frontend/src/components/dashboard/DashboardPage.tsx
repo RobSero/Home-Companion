@@ -5,7 +5,7 @@ const DashboardPage = () => {
 
 
   return (
-    <div>
+    <div className='r-container'>
     <SecondaryNavbar />
   <h1>DASHBOARD</h1>
   </div>

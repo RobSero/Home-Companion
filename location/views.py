@@ -44,7 +44,7 @@ class LocationSetup(APIView):
     new_location = LocationSerializer(data=req.data)
     if new_location.is_valid():
       new_location.save()
-      return Response(req.data, status=status.HTTP_201_CREATED)
+      return Response(new_location.data, status=status.HTTP_201_CREATED)
     return Response(new_location.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
     
 
