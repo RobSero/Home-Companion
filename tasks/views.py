@@ -138,9 +138,12 @@ class MyTasks(APIView):
     # return top 10 tasks
     return Response(serialized_tasks.data)
   
+  
+
+  
 class LocationTasks(APIView):
   permission_classes = (IsAuthenticated,)
-  
+  #  -------- GET LOCATION TASKLIST ---------------
    # GET request to /task/all/locationId
   # Requires valid auth token and be a member of that location
   # No body required

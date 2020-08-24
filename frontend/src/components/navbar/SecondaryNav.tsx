@@ -101,7 +101,7 @@ const changeLocation = (num:number) => {
        '' :
      <div className="navbar-item">
      {mainProperty.members.map((member:object) => {
-       return <img src='https://res.cloudinary.com/dy7eycl8m/image/upload/v1591819721/empty-avatar-png-transparent_mighcw.png'/>
+       return <img key={Math.random()} src='https://res.cloudinary.com/dy7eycl8m/image/upload/v1591819721/empty-avatar-png-transparent_mighcw.png'/>
      })}
    </div>
       }

@@ -26,3 +26,15 @@ export const getUserLocations = async() => {
 export const createProperty = async(formData:object) => {
   return await axios.post(`${baseUrl}/location/setup/`, formData, withHeaders()) 
 }
+
+export const getLocationMembers = async(pk:string) => {
+  return await axios.get(`${baseUrl}/location/${pk}`, withHeaders()) 
+}
+
+export const getLocationTasks = async(pk:string) => {
+  return await axios.get(`${baseUrl}/task/all/${pk}`, withHeaders()) 
+}
+
+export const createTask = async(taskData:object, locationId:string) => {
+  return await axios.post(`${baseUrl}/task/${locationId}/`, taskData, withHeaders()) 
+}

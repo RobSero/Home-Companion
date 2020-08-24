@@ -121,7 +121,7 @@ class LocationMembers(APIView):
 
 #  ----------- GET USERS LOCATIONS ---------------
 
-# GET request to /user/locations
+# GET request to /location/user
 #  no body required
 #  valid token required
 class UserLocations(APIView):
@@ -139,3 +139,16 @@ class UserLocations(APIView):
     serialized_locations = SimpleLocationSerializer(location_list, many=True)
     # return the data
     return Response(serialized_locations.data)
+  
+  
+class LocationInformation(APIView):
+  permission_classes = (IsAuthenticated,)
+  # GET request to /location/<int:locationId>
+#  no body required
+#  valid token required
+  
+  def get(self,req,pk):
+    # get location from db
+    location = get_location(pk=pk)
+    serialized_location = SimpleLocationSerializer(location)
+    return Response(serialized_location.data, status=status.HTTP_200_OK)
