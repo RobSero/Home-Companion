@@ -1,18 +1,30 @@
 import React from 'react'
-
+import TaskCard from './Task'
 
 const TaskList = (props:any) => {
 
   return (
     <div style={{height: '200px', backgroundColor: 'pink'}}>
       <p>Task Area</p>
-    {props.members.map((member:any)=> {
+      <div className='task-flex-container'>
+      {props.members.map((member:any)=> {
       return (
-        <div key={member.id} style={{height: '400px', backgroundColor: 'green', width: '20%'}}>
-          <p>{member['first_name']} {member['last_name']}</p>
+        <div key={member.id} className='task-flex-item'>
+          <div className='task-card-header'>
+          <h3 className='task-list-name'>{member['first_name']} {member['last_name']}</h3>
+            </div>
+            <div className='task-list'>
+            {props.tasks.map(((task:any) => {
+              if(task.assigned_to && task.assigned_to.id === member.id) {
+                return <TaskCard task={task} />
+              }
+            }))}
+          </div>
           </div>
       )
     })}
+      </div>
+   
     </div>
   )
 }

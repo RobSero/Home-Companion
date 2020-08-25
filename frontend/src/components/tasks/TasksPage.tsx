@@ -9,6 +9,7 @@ interface RouteParams {
   id:string
 }
 
+
 const TasksPage = () => {
 const [members, updateMembers] = React.useState([{first_name: 'X', last_name: 'Y'}])
 const [tasks, updateTasks] = React.useState([{first_name: 'X', last_name: 'Y'}])
@@ -18,7 +19,6 @@ const {id} = useParams<RouteParams>()
 const getMembers = async() => {
   try {
     const res = await getLocationMembers(id)
-    console.log(res.data)
     updateMembers(res.data.members)
   } catch(err){
     console.log(err);
@@ -39,7 +39,6 @@ const submitNewTask = async(task:object) => {
   console.log(task);
   try {
     const res = await createTask(task, id)
-    console.log(res.data)
   } catch(err){
     console.log(err.response);
     
@@ -56,7 +55,7 @@ React.useEffect(()=> {
     <div className='r-container'>
     <SecondaryNavbar />
   <NewTaskInput members={members} submitTask={submitNewTask} />
-  <TaskList members={members} />
+  <TaskList members={members} tasks={tasks} />
   </div>
   )
 }

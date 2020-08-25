@@ -24,7 +24,6 @@ const NewTaskInput = (props:any) => {
         [name]: value == '0' ? true : false
       })
     }
-    console.log(taskData);
   }
 
   const handleSubmit = (e:any) => {

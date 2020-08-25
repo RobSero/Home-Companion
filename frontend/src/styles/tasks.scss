@@ -1,0 +1,39 @@
+.task-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .task-flex-item {
+    transition: all 0.5s ease;
+    height: 400px;
+    background-color: white;
+    width: 20%;
+    min-width: 300px;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    &:hover {
+      box-shadow: rgb(143, 39, 39) 0 0 20px;
+    }
+    .task-card-header {
+      text-align: center;
+      padding: 0.3rem;
+      .task-list-name {
+        font-size: 1rem;
+        margin: 1px auto;
+      }
+    }
+
+    .task-list {
+      padding: 1.1rem;
+      overflow-y: scroll;
+      height: 85%;
+      .task-card {
+        padding: 1rem;
+        margin: 0.3rem;
+        background-color: aqua;
+      }
+    }
+    
+  }
+}
+
