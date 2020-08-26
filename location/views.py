@@ -83,6 +83,7 @@ class LocationMembers(APIView):
   # Valid jwt token required
   def put(self,req,pk,email):
     # find location
+    print('HELLOOOOOOO')
     location = get_location(pk=pk)
     print(location.members)
     # find member
@@ -99,7 +100,7 @@ class LocationMembers(APIView):
 
 
 
-  # -----------  REMOVE MEMBERS TO LOCATION --------------
+  # -----------  REMOVE MEMBERS FROM LOCATION --------------
   # DELETE request to /location/<locationID>/<memberEmail>
   # No body required
   # Valid jwt token required

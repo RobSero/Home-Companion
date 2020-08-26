@@ -3,7 +3,8 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import NewPropertyModal from '../dataInput/NewPropertyModal'
 import {getUserLocations} from '../../lib/api'
-import {CaretDownOutlined} from '@ant-design/icons';
+import {CaretDownOutlined } from '@ant-design/icons';
+import AddMemberModal from '../dataInput/AddMemberModal'
 
 const SecondaryNavbar = () => {
 const [isOpen, toggleOpen] = React.useState(false)
@@ -25,6 +26,18 @@ const getUserData = async() => {
   }
 }
 
+const addedMember = async(propertyId:number) => {
+  try {
+    console.log('RELOAD REQUIRED');
+    await getUserLocations()
+    setMainProperty({property_name: null, members:[], id: null})
+    changeLocation(propertyId)
+  }
+  catch(err) {
+    console.log(err.response);
+  }
+}
+
 // --------------- ON COMPONENT MOUNT ----------------
 React.useEffect(()=> {
 getUserData()
@@ -39,6 +52,8 @@ const changeLocation = (num:number) => {
   const selectedLocation = userLocationList.filter((location:any) => {
       return location['id'] === num
   })
+  console.log('SETTING LOCATION');
+  
   setMainProperty(selectedLocation[0])
 }
 
@@ -103,6 +118,8 @@ const changeLocation = (num:number) => {
      {mainProperty.members.map((member:object) => {
        return <img key={Math.random()} src='https://res.cloudinary.com/dy7eycl8m/image/upload/v1591819721/empty-avatar-png-transparent_mighcw.png'/>
      })}
+     
+     <AddMemberModal mainProperty={mainProperty} addedMember={addedMember} />
    </div>
       }
       </div>

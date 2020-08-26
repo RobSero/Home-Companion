@@ -16,7 +16,7 @@ const TaskList = (props:any) => {
             <div className='task-list'>
             {props.tasks.map(((task:any) => {
               if(task.assigned_to && task.assigned_to.id === member.id) {
-                return <TaskCard task={task} />
+                return <TaskCard members={props.members} task={task} handleComplete={props.handleComplete} handleReassign={props.handleReassign} />
               }
             }))}
           </div>

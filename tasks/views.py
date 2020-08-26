@@ -115,6 +115,27 @@ class TaskEdit(APIView):
     return Response({'message': 'Task Completed'}, status=status.HTTP_202_ACCEPTED)
 
 
+class ReassignTask(APIView):
+  permission_classes = (IsAuthenticated,)
+   #  -------- REASSIGN TASK ---------------
+  # PUT request to /task/taskId/reassign/userId
+  # Requires valid auth token
+  # No body required
+  def put(self,req,taskId,userId):
+    # get task
+    reassigned_task = get_task(pk=taskId)
+    print(reassigned_task)
+    # get property from task
+    location = get_location(reassigned_task.location.id)
+    print(location)
+    # check if user exists in location
+    if location.members.filter(pk=userId).exists():
+      assigned_user = get_user(userId=userId)
+      reassigned_task.assigned_to = assigned_user
+      reassigned_task.save()
+      return Response({'message': 'Successfully Reassigned'}, status=status.HTTP_202_ACCEPTED)
+    #  re-assign
+    return Response({'yo': 'DOES NOT EXIST'}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 #  -------------------- REQUESTING TASK LISTS ------------------------
 
@@ -156,7 +177,7 @@ class LocationTasks(APIView):
     if not location.members.filter(pk=logged_in_user.id).exists():
       raise PermissionDenied()
     # get location tasks
-    location_task_list = get_location_tasks(locationId=location.id)
+    location_task_list = get_location_tasks(locationId=location.id).filter(completed=False)
     print(location_task_list)
     # serialize and send
     serialized_tasks = PopulatedTaskSerializer(location_task_list, many=True)
