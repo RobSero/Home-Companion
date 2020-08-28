@@ -4,7 +4,7 @@ import TaskCard from './Task'
 const TaskList = (props:any) => {
 
   return (
-    <div style={{height: '200px', backgroundColor: 'pink'}}>
+    <div style={{height: '200px'}}>
       <p>Task Area</p>
       <div className='task-flex-container'>
       {props.members.map((member:any)=> {

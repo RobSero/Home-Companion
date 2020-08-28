@@ -67,7 +67,7 @@ const changeLocation = (num:number) => {
      </div> :
      <div className="navbar-item has-dropdown is-hoverable">
        {/* MAP OUT LIST OF USER'S PROPERTIES */}
-     <p>{mainProperty['property_name']}</p><CaretDownOutlined />
+     <p className='navbar-secondary-text'>{mainProperty['property_name']}</p><CaretDownOutlined />
      <div className="navbar-dropdown is-boxed">
         {userLocationList.length === 1 ? '' :
         userLocationList.map((location:any) => {
@@ -97,16 +97,16 @@ const changeLocation = (num:number) => {
   {/* PROPERTY OPTIONS ON NAVBAR */}
     <div id="navbarExampleTransparentExample" className={isOpen? "navbar-menu is-active" : "navbar-menu" }>
       <div className="navbar-start">
-        <Link to={`/tasks/${mainProperty.id}`}>
+        <Link className='navbar-secondary-text' to={`/tasks/${mainProperty.id}`}>
           Tasks
         </Link>
-        <Link to={`/groceries/${mainProperty.id}`}>
+        <Link className='navbar-secondary-text' to={`/groceries/${mainProperty.id}`}>
           Groceries
           </Link>
-        <Link to={`/calendar/${mainProperty.id}`}>
+        <Link className='navbar-secondary-text' to={`/calendar/${mainProperty.id}`}>
           Calendar
           </Link>
-        <Link to={`/details/${mainProperty.id}`}>
+        <Link className='navbar-secondary-text' to={`/details/${mainProperty.id}`}>
           Property Details
           </Link>
       </div>
