@@ -1,0 +1,16 @@
+.details-flex-container {
+  background-color: green;
+  margin: 0 auto;
+  height: 300px;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.details-flex-item {
+  background-color: purple;
+  margin: 5px;
+  height: 100px;
+  width: 40%;
+}

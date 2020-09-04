@@ -1,4 +1,4 @@
-from .serializers import LocationSerializer, SimpleLocationSerializer
+from .serializers import LocationSerializer, SimpleLocationSerializer, DetailedLocationSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -152,4 +152,17 @@ class LocationInformation(APIView):
     # get location from db
     location = get_location(pk=pk)
     serialized_location = SimpleLocationSerializer(location)
+    return Response(serialized_location.data, status=status.HTTP_200_OK)
+  
+
+class LocationDetails(APIView):
+  permission_classes = (IsAuthenticated,)
+  # GET request to /location/details/<int:locationId>
+#  no body required
+#  valid token required
+  
+  def get(self,req,pk):
+    # get location from db
+    location = get_location(pk=pk)
+    serialized_location = DetailedLocationSerializer(location)
     return Response(serialized_location.data, status=status.HTTP_200_OK)

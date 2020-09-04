@@ -16,3 +16,12 @@ class SimpleLocationSerializer(serializers.ModelSerializer):
     fields = ('property_name','members','id')
     
     
+
+class DetailedLocationSerializer(serializers.ModelSerializer):
+  members = SimpleUserSerializer(many=True)
+  
+  class Meta:
+    model = Location
+    fields = '__all__'
+    
+    

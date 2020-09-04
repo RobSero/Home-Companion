@@ -50,3 +50,7 @@ export const addNewMember = async(userEmail:string, locationId:string) => {
 export const reassignTask = async(taskId:string, userId:string) => {
   return await axios.put(`${baseUrl}/task/${taskId}/reassign/${userId}`, {}, withHeaders()) 
 }
+
+export const getLocationDetails = async(pk:string) => {
+  return await axios.get(`${baseUrl}/location/details/${pk}`, withHeaders()) 
+}
